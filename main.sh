@@ -44,3 +44,6 @@ perform-all
 perform-all
 perform-all
 perform-all
+
+# Signal completion
+curl -X POST "https://maker.ifttt.com/trigger/puzzlef/with/key/${IFTTT_KEY}?value1=$src$1"
