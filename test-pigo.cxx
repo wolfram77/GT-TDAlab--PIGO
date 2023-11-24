@@ -16,6 +16,10 @@ using namespace std;
 /** Number of times to repeat each method. */
 #define REPEAT_METHOD 5
 #endif
+#ifndef MEASURE_CSR
+/** Whether to measure CSR methods. */
+#define MEASURE_CSR 1
+#endif
 #pragma endregion
 
 
@@ -33,13 +37,19 @@ int main(int argc, char** argv) {
   printf("Loading graph %s ...\n", file);
   for (int i=0; i<repeat; ++i) {
     auto  t0 = timeNow();
+    #if MEASURE_CSR==1
     pigo::Graph x { file };
+    #else
+    pigo::COO x { file };
+    #endif
     auto  t1 = timeNow();
     printf("order: %zu, size: %zu {}\n", size_t(x.n()), size_t(x.m()));
     float tl = duration(t0, t1);
     printf("{%09.1fms} pigo_Graph\n", tl);
+    #if MEASURE_CSR==1
     float ts = measureDuration([&]() { x.sort(); });
     printf("{%09.1fms} pigo_Graph_sort\n", ts);
+    #endif
     x.free();
   }
   printf("\n");
