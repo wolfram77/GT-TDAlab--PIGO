@@ -50,6 +50,18 @@ int main(int argc, char** argv) {
     float ts = measureDuration([&]() { x.sort(); });
     printf("{%09.1fms} pigo_Graph_sort\n", ts);
     #endif
+    #if LOG_EDGES==1
+    uint32_t n = x.n();
+    for (uint32_t u=0; u<n; ++u) {
+      uint32_t d = x.degree(u);
+      printf("%zu: %zu\n", u, d);
+    }
+    for (uint32_t u=0; u<n; ++u) {
+      for (auto v : x.neighbors(u)) {
+        printf("%zu %zu\n", u, v);
+      }
+    }
+    #endif
     x.free();
   }
   printf("\n");

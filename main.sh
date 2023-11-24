@@ -16,11 +16,13 @@ fi
 : "${MAX_THREADS:=64}"
 : "${REPEAT_METHOD:=1}"
 : "${MEASURE_CSR:=1}"
+: "${LOG_EDGES:=0}"
 # Define macros (dont forget to add here)
 DEFINES=(""
 "-DMAX_THREADS=$MAX_THREADS"
 "-DREPEAT_METHOD=$REPEAT_METHOD"
 "-DMEASURE_CSR=$MEASURE_CSR"
+"-DLOG_EDGES=$LOG_EDGES"
 )
 
 # Run
